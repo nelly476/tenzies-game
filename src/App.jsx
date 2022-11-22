@@ -47,12 +47,17 @@ function App() {
   }
 
   function changeDice() {
-    setDice((prevDice) =>
-      prevDice.map((die) => {
-        const id = nanoid();
-        return die.isHeld ? die : generateNewDie();
-      })
-    );
+    if (tenzies) {
+      setTenzies(false);
+      setDice(allNewDice());
+    } else {
+      setDice((prevDice) =>
+        prevDice.map((die) => {
+          const id = nanoid();
+          return die.isHeld ? die : generateNewDie();
+        })
+      );
+    }
   }
 
   function holdDice(dieId) {
