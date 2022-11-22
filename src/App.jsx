@@ -7,6 +7,7 @@ import Confetti from "react-confetti";
 function App() {
   const [dice, setDice] = useState(allNewDice());
   const [tenzies, setTenzies] = useState(false);
+  const [number, setNumber] = useState(0);
 
   useEffect(() => {
     const allHeld = dice.every((die) => die.isHeld);
@@ -51,6 +52,7 @@ function App() {
       setTenzies(false);
       setDice(allNewDice());
     } else {
+      setNumber((prevNum) => prevNum + 1);
       setDice((prevDice) =>
         prevDice.map((die) => {
           const id = nanoid();
@@ -80,6 +82,7 @@ function App() {
       <button className="roll-dice" onClick={changeDice}>
         {tenzies ? "New Game" : "Roll"}
       </button>
+      <h3>Number of rolls: {number}</h3>
     </main>
   );
 }
